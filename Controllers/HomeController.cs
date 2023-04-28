@@ -26,5 +26,12 @@ namespace WebForm.Controllers
 
             return View();
         }
+
+        public ActionResult Login()
+        {
+            ViewBag.Message = "Log in";
+
+            return View();
+        }
     }
 }

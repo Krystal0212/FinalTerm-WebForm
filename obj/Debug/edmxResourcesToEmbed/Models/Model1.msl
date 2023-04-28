@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="distributorManageModelStoreContainer" CdmEntityContainer="distributorManageEntities">
+    <EntitySetMapping Name="accounts">
+      <EntityTypeMapping TypeName="distributorManageModel.account">
+        <MappingFragment StoreEntitySet="account">
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+          <ScalarProperty Name="accType" ColumnName="accType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CurrentGoods">
+      <EntityTypeMapping TypeName="distributorManageModel.CurrentGood">
+        <MappingFragment StoreEntitySet="CurrentGoods">
+          <ScalarProperty Name="goodID" ColumnName="goodID" />
+          <ScalarProperty Name="goodName" ColumnName="goodName" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orderDetails">
+      <EntityTypeMapping TypeName="distributorManageModel.orderDetail">
+        <MappingFragment StoreEntitySet="orderDetail">
+          <ScalarProperty Name="ordernumber" ColumnName="ordernumber" />
+          <ScalarProperty Name="orderID" ColumnName="orderID" />
+          <ScalarProperty Name="itemID" ColumnName="itemID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orderLists">
+      <EntityTypeMapping TypeName="distributorManageModel.orderList">
+        <MappingFragment StoreEntitySet="orderList">
+          <ScalarProperty Name="orderID" ColumnName="orderID" />
+          <ScalarProperty Name="resellerID" ColumnName="resellerID" />
+          <ScalarProperty Name="createdDay" ColumnName="createdDay" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resellers">
+      <EntityTypeMapping TypeName="distributorManageModel.Reseller">
+        <MappingFragment StoreEntitySet="Reseller">
+          <ScalarProperty Name="resellerID" ColumnName="resellerID" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="displayname" ColumnName="displayname" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

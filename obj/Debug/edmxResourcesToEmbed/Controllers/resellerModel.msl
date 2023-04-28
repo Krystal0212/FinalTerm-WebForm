@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="resellerModelStoreContainer" CdmEntityContainer="DevConn">
+    <EntitySetMapping Name="accounts">
+      <EntityTypeMapping TypeName="resellerModel.account">
+        <MappingFragment StoreEntitySet="account">
+          <ScalarProperty Name="accType" ColumnName="accType" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+          <ScalarProperty Name="username" ColumnName="username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CurrentGoods">
+      <EntityTypeMapping TypeName="resellerModel.CurrentGood">
+        <MappingFragment StoreEntitySet="CurrentGoods">
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="goodName" ColumnName="goodName" />
+          <ScalarProperty Name="goodID" ColumnName="goodID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orderDetails">
+      <EntityTypeMapping TypeName="resellerModel.orderDetail">
+        <MappingFragment StoreEntitySet="orderDetail">
+          <ScalarProperty Name="itemID" ColumnName="itemID" />
+          <ScalarProperty Name="orderID" ColumnName="orderID" />
+          <ScalarProperty Name="ordernumber" ColumnName="ordernumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orderLists">
+      <EntityTypeMapping TypeName="resellerModel.orderList">
+        <MappingFragment StoreEntitySet="orderList">
+          <ScalarProperty Name="createdDay" ColumnName="createdDay" />
+          <ScalarProperty Name="resellerID" ColumnName="resellerID" />
+          <ScalarProperty Name="orderID" ColumnName="orderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resellers">
+      <EntityTypeMapping TypeName="resellerModel.Reseller">
+        <MappingFragment StoreEntitySet="Reseller">
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="displayname" ColumnName="displayname" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="resellerID" ColumnName="resellerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

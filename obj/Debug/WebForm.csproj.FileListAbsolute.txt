@@ -51,6 +51,8 @@ D:\Project\C#\FinalTerm\WebForm\bin\roslyn\vbc.rsp
 D:\Project\C#\FinalTerm\WebForm\bin\roslyn\VBCSCompiler.exe
 D:\Project\C#\FinalTerm\WebForm\bin\roslyn\VBCSCompiler.exe.config
 D:\Project\C#\FinalTerm\WebForm\bin\Antlr3.Runtime.dll
+D:\Project\C#\FinalTerm\WebForm\bin\EntityFramework.dll
+D:\Project\C#\FinalTerm\WebForm\bin\EntityFramework.SqlServer.dll
 D:\Project\C#\FinalTerm\WebForm\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\Project\C#\FinalTerm\WebForm\bin\Microsoft.Web.Infrastructure.dll
 D:\Project\C#\FinalTerm\WebForm\bin\Newtonsoft.Json.dll
@@ -62,6 +64,8 @@ D:\Project\C#\FinalTerm\WebForm\bin\System.Web.WebPages.Deployment.dll
 D:\Project\C#\FinalTerm\WebForm\bin\System.Web.WebPages.dll
 D:\Project\C#\FinalTerm\WebForm\bin\System.Web.WebPages.Razor.dll
 D:\Project\C#\FinalTerm\WebForm\bin\WebGrease.dll
+D:\Project\C#\FinalTerm\WebForm\bin\EntityFramework.xml
+D:\Project\C#\FinalTerm\WebForm\bin\EntityFramework.SqlServer.xml
 D:\Project\C#\FinalTerm\WebForm\bin\System.Web.Helpers.xml
 D:\Project\C#\FinalTerm\WebForm\bin\System.Web.Mvc.xml
 D:\Project\C#\FinalTerm\WebForm\bin\System.Web.Optimization.xml
