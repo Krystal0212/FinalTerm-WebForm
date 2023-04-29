@@ -1,15 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="distributorManageModelStoreContainer" CdmEntityContainer="distributorManageEntities">
-    <EntitySetMapping Name="accounts">
-      <EntityTypeMapping TypeName="distributorManageModel.account">
-        <MappingFragment StoreEntitySet="account">
-          <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="pass" ColumnName="pass" />
-          <ScalarProperty Name="accType" ColumnName="accType" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CurrentGoods">
       <EntityTypeMapping TypeName="distributorManageModel.CurrentGood">
         <MappingFragment StoreEntitySet="CurrentGoods">
@@ -45,6 +36,15 @@
           <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="displayname" ColumnName="displayname" />
           <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="accounts">
+      <EntityTypeMapping TypeName="distributorManageModel.account">
+        <MappingFragment StoreEntitySet="account">
+          <ScalarProperty Name="accType" ColumnName="accType" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+          <ScalarProperty Name="username" ColumnName="username" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

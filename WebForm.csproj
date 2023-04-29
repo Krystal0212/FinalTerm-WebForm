@@ -55,6 +55,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.5, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Data.SqlClient.4.8.5\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -129,7 +132,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\accountsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\orderDetailsController.cs" />
     <Compile Include="Controllers\orderListsController.cs" />
@@ -238,11 +240,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\accounts\Create.cshtml" />
-    <Content Include="Views\accounts\Delete.cshtml" />
-    <Content Include="Views\accounts\Details.cshtml" />
-    <Content Include="Views\accounts\Edit.cshtml" />
-    <Content Include="Views\accounts\Index.cshtml" />
     <Content Include="Views\CurrentGoods\Create.cshtml" />
     <Content Include="Views\CurrentGoods\Delete.cshtml" />
     <Content Include="Views\CurrentGoods\Details.cshtml" />
@@ -264,6 +261,7 @@
     <Content Include="Views\Resellers\Edit.cshtml" />
     <Content Include="Views\Resellers\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Signup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

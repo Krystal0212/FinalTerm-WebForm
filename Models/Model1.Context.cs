@@ -25,10 +25,10 @@ namespace WebForm.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<account> accounts { get; set; }
         public virtual DbSet<CurrentGood> CurrentGoods { get; set; }
         public virtual DbSet<orderDetail> orderDetails { get; set; }
         public virtual DbSet<orderList> orderLists { get; set; }
         public virtual DbSet<Reseller> Resellers { get; set; }
+        public virtual DbSet<account> accounts { get; set; }
     }
 }
