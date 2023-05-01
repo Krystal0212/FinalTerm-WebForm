@@ -1,48 +1,55 @@
 ﻿@model IEnumerable<WebForm.Models.CurrentGood>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Product list";
 }
 
-<h2>Index</h2>
+<head>
+    <link href="@Url.Content("~/Content/Aternative.css")" rel="stylesheet" type="text/css" />
+</head>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.goodName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th></th>
-    </tr>
+<main aria-labelledby="title">
+    <p></p>
+    <h3 id="title">@ViewBag.Title | <small class="smallsize">@ViewBag.Message</small></h3>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.goodName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.goodID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.goodID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.goodID })
-        </td>
-        <td align="center">
-            <a href="@Url.Action("Buy", "Cart", new { id = item.goodID })">Buy Now</a>
-        </td>
-    </tr>
-}
+    <p></p>
+    <table class="table">
+        <tr>
+            <th>
+                Product Name
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.goodName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.goodID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.goodID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.goodID })*@
+                    <input type="number" id="quantity" name="quantity" min="1" max="@item.Quantity">
+                </td>
+                <td align="center">
+                    <a href="@Url.Action("AddCartUrl", "Carts", new { id = item.goodID })">Add to cart</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</main>

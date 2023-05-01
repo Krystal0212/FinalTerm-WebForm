@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MAM = Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -124,12 +125,24 @@ namespace WebForm.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult Buy(string id)
+        public ActionResult callUrl(string id)
         {
-            Cart cart = db.Carts.Find(id);
-            db.Carts.Remove(cart);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            string url = "/Carts/AddCart?id=" + id;
+            return Redirect(url);
+        }
+
+        [HttpGet]
+        public ActionResult AddCartUrl(string id)
+        {
+
+            return callUrl(id);
+        }
+
+        public ActionResult AddCart(string id)
+        {
+
+
+            return View("View");
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
+
 namespace WebForm.Models
 {
     public class CurrentGoodsController : Controller
@@ -12,6 +13,7 @@ namespace WebForm.Models
         // GET: CurrentGoods
         public ActionResult Index()
         {
+            ViewBag.Message = "Select your desired item and add it to your cart ";
             return View(db.CurrentGoods.ToList());
         }
 

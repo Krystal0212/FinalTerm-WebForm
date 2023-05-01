@@ -15,10 +15,17 @@ namespace WebForm
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
+            //routes.MapRoute(
+            //    name: "Cart",
+            //    url: "carts/buy",
+            //    defaults: new { controller = "Carts", action = "Buy", id = UrlParameter.Optional }
+            //);
+
             routes.MapRoute(
                 name: "Cart",
-                url: "Cart/Buy/{id}/",
-                defaults: new { controller = "Cart", action = "Buy", id = UrlParameter.Optional }
+                url: "Carts/Buy",
+                defaults: new { controller = "Carts", action = "Buy", id = UrlParameter.Optional },
+                constraints: new { id = @"\d+" }
             );
         }
     }
