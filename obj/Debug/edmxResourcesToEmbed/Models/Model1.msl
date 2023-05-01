@@ -14,6 +14,9 @@
     <EntitySetMapping Name="orderDetails">
       <EntityTypeMapping TypeName="distributorManageModel.orderDetail">
         <MappingFragment StoreEntitySet="orderDetail">
+          <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="pricePerItem" ColumnName="pricePerItem" />
           <ScalarProperty Name="ordernumber" ColumnName="ordernumber" />
           <ScalarProperty Name="orderID" ColumnName="orderID" />
           <ScalarProperty Name="itemID" ColumnName="itemID" />
@@ -45,6 +48,18 @@
           <ScalarProperty Name="accType" ColumnName="accType" />
           <ScalarProperty Name="pass" ColumnName="pass" />
           <ScalarProperty Name="username" ColumnName="username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Carts">
+      <EntityTypeMapping TypeName="distributorManageModel.Cart">
+        <MappingFragment StoreEntitySet="Cart">
+          <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="pricePerItem" ColumnName="pricePerItem" />
+          <ScalarProperty Name="itemID" ColumnName="itemID" />
+          <ScalarProperty Name="orderID" ColumnName="orderID" />
+          <ScalarProperty Name="cartNumber" ColumnName="cartNumber" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

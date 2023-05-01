@@ -16,6 +16,9 @@
     <Property Name="ordernumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="orderID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="itemID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="pricePerItem" Type="Int32" />
+    <Property Name="quantity" Type="Int32" />
+    <Property Name="totalPrice" Type="Int32" />
   </EntityType>
   <EntityType Name="orderList">
     <Key>
@@ -40,13 +43,25 @@
     <EntitySet Name="orderLists" EntityType="Self.orderList" />
     <EntitySet Name="Resellers" EntityType="Self.Reseller" />
     <EntitySet Name="accounts" EntityType="distributorManageModel.account" />
+    <EntitySet Name="Carts" EntityType="distributorManageModel.Cart" />
   </EntityContainer>
   <EntityType Name="account">
     <Key>
       <PropertyRef Name="username" />
     </Key>
     <Property Name="username" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="pass" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="pass" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="accType" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="cartNumber" />
+    </Key>
+    <Property Name="cartNumber" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="orderID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="itemID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="pricePerItem" Type="Int32" />
+    <Property Name="quantity" Type="Int32" />
+    <Property Name="totalPrice" Type="Int32" />
   </EntityType>
 </Schema>

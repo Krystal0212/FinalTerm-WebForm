@@ -13,7 +13,7 @@
 
         a {
             text-decoration: none;
-            color : cyan;
+            color: cyan;
         }
 
         .btn-outline-cyan {
@@ -27,32 +27,31 @@
             --bs-btn-active-bg: #00e6e6;
         }
 
-        .btn-outline-cyan:hover {
+            .btn-outline-cyan:hover {
                 color: white;
                 background-color: cyan;
                 border-color: cyan;
-        } 
+            }
     </style>
 </head>
 
 <main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title | <small class="smallsize" >@ViewBag.Message</small></h2>
+    <h2 id="title">@ViewBag.Title | <small class="smallsize">@ViewBag.Message</small></h2>
 
 
     <p> </p>
 
-    <form action="">
+    <form action="verify" method="post">
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter username">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <input type="text" name="username" class="form-control" id="username" placeholder="Enter username">
         </div>
 
         <p> </p>
 
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Password">
+            <input type="password" name="pass" class="form-control" id="password" placeholder="Password">
         </div>
 
         <p> </p>
@@ -67,7 +66,7 @@
         <p> </p>
 
         @*<button type="submit" class="btn btn-outline-cyan" id="button-cyan" onclick="location.href='@Url.Action("Index", "CurrentGoods")'">Submit</button>*@
-        <button type="submit" class="btn btn-outline-cyan" id="button-cyan" action="" ">Submit</button>
+        <button type="submit" class="btn btn-outline-cyan" id="button-cyan">Submit</button>
     </form>
 
 

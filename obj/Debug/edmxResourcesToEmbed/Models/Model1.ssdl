@@ -5,8 +5,19 @@
       <PropertyRef Name="username" />
     </Key>
     <Property Name="username" Type="nvarchar" MaxLength="30" Nullable="false" />
-    <Property Name="pass" Type="nvarchar" MaxLength="30" />
+    <Property Name="pass" Type="nvarchar" MaxLength="100" />
     <Property Name="accType" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="cartNumber" />
+    </Key>
+    <Property Name="cartNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="orderID" Type="nvarchar" MaxLength="30" />
+    <Property Name="itemID" Type="nvarchar" MaxLength="30" />
+    <Property Name="pricePerItem" Type="int" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="totalPrice" Type="int" />
   </EntityType>
   <EntityType Name="CurrentGoods">
     <Key>
@@ -24,6 +35,9 @@
     <Property Name="ordernumber" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="orderID" Type="nvarchar" MaxLength="30" />
     <Property Name="itemID" Type="nvarchar" MaxLength="30" />
+    <Property Name="pricePerItem" Type="int" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="totalPrice" Type="int" />
   </EntityType>
   <EntityType Name="orderList">
     <Key>
@@ -44,6 +58,7 @@
   </EntityType>
   <EntityContainer Name="distributorManageModelStoreContainer">
     <EntitySet Name="account" EntityType="Self.account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CurrentGoods" EntityType="Self.CurrentGoods" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="orderDetail" EntityType="Self.orderDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="orderList" EntityType="Self.orderList" Schema="dbo" store:Type="Tables" />

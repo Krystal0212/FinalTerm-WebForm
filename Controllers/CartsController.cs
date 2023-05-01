@@ -6,110 +6,111 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WebForm.Models;
 
-namespace WebForm.Models
+namespace WebForm.Controllers
 {
-    public class ResellersController : Controller
+    public class CartsController : Controller
     {
         private distributorManageEntities db = new distributorManageEntities();
 
-        // GET: Resellers
+        // GET: Carts
         public ActionResult Index()
         {
-            return View(db.Resellers.ToList());
+            return View(db.Carts.ToList());
         }
 
-        // GET: Resellers/Details/5
+        // GET: Carts/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Reseller reseller = db.Resellers.Find(id);
-            if (reseller == null)
+            Cart cart = db.Carts.Find(id);
+            if (cart == null)
             {
                 return HttpNotFound();
             }
-            return View(reseller);
+            return View(cart);
         }
 
-        // GET: Resellers/Create
+        // GET: Carts/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Resellers/Create
+        // POST: Carts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "resellerID,username,displayname,email")] Reseller reseller)
+        public ActionResult Create([Bind(Include = "cartNumber,orderID,itemID,pricePerItem,quantity,totalPrice")] Cart cart)
         {
             if (ModelState.IsValid)
             {
-                db.Resellers.Add(reseller);
+                db.Carts.Add(cart);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(reseller);
+            return View(cart);
         }
 
-        // GET: Resellers/Edit/5
+        // GET: Carts/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Reseller reseller = db.Resellers.Find(id);
-            if (reseller == null)
+            Cart cart = db.Carts.Find(id);
+            if (cart == null)
             {
                 return HttpNotFound();
             }
-            return View(reseller);
+            return View(cart);
         }
 
-        // POST: Resellers/Edit/5
+        // POST: Carts/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "resellerID,username,displayname,email")] Reseller reseller)
+        public ActionResult Edit([Bind(Include = "cartNumber,orderID,itemID,pricePerItem,quantity,totalPrice")] Cart cart)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(reseller).State = EntityState.Modified;
+                db.Entry(cart).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(reseller);
+            return View(cart);
         }
 
-        // GET: Resellers/Delete/5
+        // GET: Carts/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Reseller reseller = db.Resellers.Find(id);
-            if (reseller == null)
+            Cart cart = db.Carts.Find(id);
+            if (cart == null)
             {
                 return HttpNotFound();
             }
-            return View(reseller);
+            return View(cart);
         }
 
-        // POST: Resellers/Delete/5
+        // POST: Carts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Reseller reseller = db.Resellers.Find(id);
-            db.Resellers.Remove(reseller);
+            Cart cart = db.Carts.Find(id);
+            db.Carts.Remove(cart);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -121,6 +122,14 @@ namespace WebForm.Models
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Buy(string id)
+        {
+            Cart cart = db.Carts.Find(id);
+            db.Carts.Remove(cart);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

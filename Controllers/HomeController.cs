@@ -1,23 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Data;
+using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 using System.Web.Mvc;
 using WebForm.Models;
-using System.Data.SqlClient;
-using System.Data;
+using BC = BCrypt.Net.BCrypt;
 
 namespace WebForm.Controllers
 {
     public class HomeController : Controller
     {
         private distributorManageEntities db = new distributorManageEntities();
+        SqlDataAdapter data;
+        SqlDataReader dr;
         SqlConnection cn;
-        SqlCommand cm;
+        SqlCommand cm = new SqlCommand();
         DataTable tb;
-
 
         public ActionResult Index()
         {
@@ -54,28 +53,76 @@ namespace WebForm.Controllers
 
         public void connection()
         {
+            cn = new SqlConnection();
+            cn.ConnectionString = "initial catalog = distributorManage; data source = ACERLT; integrated security = true";
+        }
 
+        public void connect()
+        {
+            string s = "initial catalog = distributorManage; data source = ACERLT; integrated security = true";
+            cn = new SqlConnection(s);
+            cn.Open();
+
+        }
+
+        public void actionQuery(string sql)
+        {
+            connect();
+            SqlCommand cmd = new SqlCommand(sql, cn);
+
+            cmd.ExecuteNonQuery();
+        }
+
+        public DataTable selectQuery(string sql)
+        {
+            connect();
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(sql, cn);
+            DataTable dt = new DataTable();
+            dataAdapter.Fill(dt);
+            return dt;
         }
 
         [HttpPost]
-        public ActionResult verify(string email, string password)
+        public ActionResult verify(account accountInserted)
         {
-            if (ModelState.IsValid)
+            string password = getBCrypt(accountInserted.pass);
+            string passwordInserted = accountInserted.pass;
+
+            string sql = " select * from account where username = N'" + accountInserted.username + "' ";
+            DataTable accountReference = selectQuery(sql);
+            string passwordReference = accountReference.Rows[0][1].ToString();
+            Boolean b = BC.Verify(passwordInserted, passwordReference);
+
+            if (BC.Verify(passwordInserted, passwordReference))
             {
-                var f_password = GetMD5(password);
-                var data = db.accounts.Where(s => s.username.Equals(email) && s.pass.Equals(f_password)).ToList();
-                if (data.Count() > 0)
-                {
-                }
-                else
-                {
-                    ViewBag.error = "Login failed";
-                    return RedirectToAction("Login");
-                }
+                return View("Index");
             }
+            return View("Login");
+        }
+
+        public ActionResult verifyByEmail(string email, string password)
+        {
+
+            //if (ModelState.IsValid)
+            //{
+            //    var f_password = GetMD5(password);
+            //    var data = db.accounts.Where(s => s.username.Equals(email) && s.pass.Equals(f_password)).ToList();
+            //    if (data.Count() > 0)
+            //    {
+            //    }
+            //    else
+            //    {
+            //        ViewBag.error = "Login failed";
+            //        return RedirectToAction("Login");
+            //    }
+            //}
             return View();
         }
 
+        public static string getBCrypt(string password)
+        {
+            return BCrypt.Net.BCrypt.HashPassword(password);
+        }
         public static string GetMD5(string str)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
@@ -90,7 +137,6 @@ namespace WebForm.Controllers
             }
             return byte2String;
         }
-
 
 
         //Logout

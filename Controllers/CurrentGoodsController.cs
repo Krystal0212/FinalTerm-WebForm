@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace WebForm.Models
@@ -121,6 +117,20 @@ namespace WebForm.Models
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult AddCart(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CurrentGood currentGood = db.CurrentGoods.Find(id);
+            if (currentGood == null)
+            {
+                return HttpNotFound();
+            }
+            return View("Index");
         }
     }
 }

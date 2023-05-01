@@ -35,9 +35,12 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.goodID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.goodID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.goodID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.goodID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.goodID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.goodID })
+        </td>
+        <td align="center">
+            <a href="@Url.Action("Buy", "Cart", new { id = item.goodID })">Buy Now</a>
         </td>
     </tr>
 }

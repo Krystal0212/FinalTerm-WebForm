@@ -11,18 +11,17 @@
 
     <div class="row">
         <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
+            <h2 id="gettingStartedTitle">Make Order</h2>
             <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
+                Online ordering provides a convenient, streamlined way to purchase products or services with ease,
+                efficiency, and availability for modern consumers.
             </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+            <p><a class="btn btn-outline-dark" href="@Url.Action("Index", "CurrentGoods")">Go to &raquo;</a></p>
         </section>
         <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+            <h2 id="librariesTitle">Check your order list</h2>
+            <p>The user order list section allows you to view and manage your past and current orders with ease, providing a convenient way to keep track of your purchases.</p>
+            <p><a class="btn btn-outline-dark" href="@Url.Action("Index", "orderDetails")">Go to &raquo;</a></p>
         </section>
         <section class="col-md-4" aria-labelledby="hostingTitle">
             <h2 id="hostingTitle">Web Hosting</h2>

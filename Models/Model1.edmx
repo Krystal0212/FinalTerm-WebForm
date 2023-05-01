@@ -10,8 +10,19 @@
             <PropertyRef Name="username" />
           </Key>
           <Property Name="username" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="pass" Type="nvarchar" MaxLength="30" />
+          <Property Name="pass" Type="nvarchar" MaxLength="100" />
           <Property Name="accType" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="cartNumber" />
+          </Key>
+          <Property Name="cartNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="orderID" Type="nvarchar" MaxLength="30" />
+          <Property Name="itemID" Type="nvarchar" MaxLength="30" />
+          <Property Name="pricePerItem" Type="int" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="totalPrice" Type="int" />
         </EntityType>
         <EntityType Name="CurrentGoods">
           <Key>
@@ -29,6 +40,9 @@
           <Property Name="ordernumber" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="orderID" Type="nvarchar" MaxLength="30" />
           <Property Name="itemID" Type="nvarchar" MaxLength="30" />
+          <Property Name="pricePerItem" Type="int" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="totalPrice" Type="int" />
         </EntityType>
         <EntityType Name="orderList">
           <Key>
@@ -49,6 +63,7 @@
         </EntityType>
         <EntityContainer Name="distributorManageModelStoreContainer">
           <EntitySet Name="account" EntityType="Self.account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CurrentGoods" EntityType="Self.CurrentGoods" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="orderDetail" EntityType="Self.orderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="orderList" EntityType="Self.orderList" Schema="dbo" store:Type="Tables" />
@@ -74,6 +89,9 @@
           <Property Name="ordernumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="orderID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="itemID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="pricePerItem" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="totalPrice" Type="Int32" />
         </EntityType>
         <EntityType Name="orderList">
           <Key>
@@ -98,14 +116,26 @@
           <EntitySet Name="orderLists" EntityType="Self.orderList" />
           <EntitySet Name="Resellers" EntityType="Self.Reseller" />
           <EntitySet Name="accounts" EntityType="distributorManageModel.account" />
+          <EntitySet Name="Carts" EntityType="distributorManageModel.Cart" />
         </EntityContainer>
         <EntityType Name="account">
           <Key>
             <PropertyRef Name="username" />
           </Key>
           <Property Name="username" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="pass" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="pass" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="accType" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="cartNumber" />
+          </Key>
+          <Property Name="cartNumber" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="orderID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="itemID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="pricePerItem" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="totalPrice" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -126,6 +156,9 @@
           <EntitySetMapping Name="orderDetails">
             <EntityTypeMapping TypeName="distributorManageModel.orderDetail">
               <MappingFragment StoreEntitySet="orderDetail">
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="pricePerItem" ColumnName="pricePerItem" />
                 <ScalarProperty Name="ordernumber" ColumnName="ordernumber" />
                 <ScalarProperty Name="orderID" ColumnName="orderID" />
                 <ScalarProperty Name="itemID" ColumnName="itemID" />
@@ -157,6 +190,18 @@
                 <ScalarProperty Name="accType" ColumnName="accType" />
                 <ScalarProperty Name="pass" ColumnName="pass" />
                 <ScalarProperty Name="username" ColumnName="username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="distributorManageModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="pricePerItem" ColumnName="pricePerItem" />
+                <ScalarProperty Name="itemID" ColumnName="itemID" />
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+                <ScalarProperty Name="cartNumber" ColumnName="cartNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
