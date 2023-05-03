@@ -270,7 +270,7 @@ namespace WebForm.Controllers
                 string currentOrderID = selectQuery(sqlGetCurrentOrderID).Rows[0][0].ToString();
                 string currentCartNumber = dtCart.Rows[dtCart.Rows.Count - 1][0].ToString();
 
-                string sqlCheckExit = "select * from cart where cartNumber = 'C0001' and itemID = '" + goodID + "' ";
+                string sqlCheckExit = "select * from cart where cartNumber = 'C0001' and itemID = '" + goodID + "' and resellerID ='"+resellerID+"'";
                 DataTable dtCheckExit = selectQuery(sqlCheckExit);
 
                 if (countCheck(dtCheckExit.Rows.Count))
