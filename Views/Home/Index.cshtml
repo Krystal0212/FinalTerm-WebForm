@@ -16,12 +16,12 @@
                 Online ordering provides a convenient, streamlined way to purchase products or services with ease,
                 efficiency, and availability for modern consumers.
             </p>
-            <p><a class="btn btn-outline-dark" href="@Url.Action("Index", "CurrentGoods")">Go to &raquo;</a></p>
+            <p><a class="btn btn-outline-dark" href="@Url.Action("Index", "CurrentGoods", new { resellerID = Session["resellerid"] })">Go to &raquo;</a></p>
         </section>
         <section class="col-md-4" aria-labelledby="librariesTitle">
             <h2 id="librariesTitle">Check your order list</h2>
             <p>The user order list section allows you to view and manage your past and current orders with ease, providing a convenient way to keep track of your purchases.</p>
-            <p><a class="btn btn-outline-dark" href="@Url.Action("Index", "orderDetails")">Go to &raquo;</a></p>
+            <p><a class="btn btn-outline-dark" href="@Url.Action("Index", "orderLists", new { resellerID = "R0001" })">Go to &raquo;</a></p>
         </section>
         <section class="col-md-4" aria-labelledby="hostingTitle">
             <h2 id="hostingTitle">Web Hosting</h2>

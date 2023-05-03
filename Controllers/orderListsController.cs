@@ -16,6 +16,13 @@ namespace WebForm.Controllers
             return View(db.orderLists.ToList());
         }
 
+        [ActionName("IndexWithResellerID")]
+        public ActionResult Index(string resellerID)
+        {
+
+            return View(db.orderDetails.ToList());
+        }
+
         // GET: orderLists/Details/5
         public ActionResult Details(string id)
         {

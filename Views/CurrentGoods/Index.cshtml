@@ -10,9 +10,8 @@
 
 <main aria-labelledby="title">
     <p></p>
-    <h3 id="title">@ViewBag.Title | <small class="smallsize">@ViewBag.Message</small></h3>
-
-    <p></p>
+    <h3 id="title">@ViewBag.Title | <small class="smallsize">@ViewBag.Message</small></h3>    <p></p>
+    <p><a class="" href="@Url.Action("Index", "Carts")">Go to your cart&raquo;</a></p>
     <table class="table">
         <tr>
             <th>
@@ -24,7 +23,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th></th>
+            <th>
+
+            </th>
         </tr>
 
         @foreach (var item in Model)
@@ -40,16 +41,72 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
-                    @*@Html.ActionLink("Edit", "Edit", new { id = item.goodID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.goodID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.goodID })*@
-                    <input type="number" id="quantity" name="quantity" min="1" max="@item.Quantity">
+                    <input type="number" value=1 id="quantity_@item.goodID" name="quantity_@item.goodID" min="1" max="@item.Quantity">
                 </td>
                 <td align="center">
-                    <a href="@Url.Action("AddCartUrl", "Carts", new { id = item.goodID })">Add to cart</a>
+                    @*<a class="btn btn-outline-cyan"
+                           id="@item.goodID" href="@Url.Action("Add", "Carts", new { id = item.goodID, quantity = 1 })">
+                            Add to cart
+                        </a>*@
+                    <button class="btn btn-outline-cyan" id="@item.goodID" href="" onclick="addToCart('@item.goodID', 1)">
+                        Add to cart
+                    </button>
                 </td>
+
             </tr>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                var quantityInput = document.getElementById("quantity_@item.goodID");
+                if (quantityInput.value === null) {
+                    quantityInput.value = 1;
+                }
+                quantityInput.addEventListener("change", function() {
+                    changeNumber("@item.goodID");
+                    });
+                });
+
+            </script>
+
+        }
+    </table>
+
+    <script>
+        function changeNumber(goodID) {
+            var x = "quantity_" + goodID + "";
+            var productQuantity = document.getElementById("quantity_" + goodID + "").value;
+            var addToCartButton = document.getElementById(goodID);
+
+            var currentOnclick = addToCartButton.getAttribute("onclick");
+            var updatedOC = currentOnclick.substring(0, currentOnclick.indexOf(goodID) + 6) + "," + productQuantity+")";
+            alert(updatedOC);
+            addToCartButton.setAttribute("onclick", updatedOC);
         }
 
-    </table>
+        // call on change event to update the button or a tag's' href which then change the view when clicked
+        //function myFunction(goodID) {
+        //    var x = "quantity_" + goodID + "";
+        //    var productQuantity = document.getElementById("quantity_" + goodID + "").value;
+        //    var addToCartButton = document.getElementById(goodID);
+
+        //    var currentHref = addToCartButton.getAttribute("href");
+        //    var updatedHref = currentHref.substring(0, currentHref.indexOf(goodID) + 5) + "?quantity=" + productQuantity;
+        //    alert(updatedHref);
+        //    addToCartButton.setAttribute("href", updatedHref);
+        //}
+
+        //call to not change the view and run in the background
+        function addToCart(id, quantity) {
+            url = "@Url.Action("Add", "Carts")/" + id + "?quantity=" + quantity;
+            $.ajax({
+                url: url,
+                type: "POST",
+                success: function(result) {
+                console.log(result);
+                },
+                error: function(xhr, status, error) {
+                console.log(xhr.responseText);
+                }
+            });
+        }
+    </script>
 </main>

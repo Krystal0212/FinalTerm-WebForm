@@ -88,15 +88,18 @@ namespace WebForm.Controllers
             string password = getBCrypt(accountInserted.pass);
             string passwordInserted = accountInserted.pass;
 
-            string sql = " select * from account where username = N'" + accountInserted.username + "' ";
+            string sql = "select * from account where username = N'" + accountInserted.username + "' ";
             DataTable accountReference = selectQuery(sql);
             string passwordReference = accountReference.Rows[0][1].ToString();
             Boolean b = BC.Verify(passwordInserted, passwordReference);
 
             if (BC.Verify(passwordInserted, passwordReference))
             {
-                return View("Index");
+                string loginID = accountReference.Rows[0][3].ToString();
+                Session["resellerid"] = loginID;
+                return RedirectToAction("Index", "Home", new { resellerID = loginID }); // Pass the username as a parameter to the Index action
             }
+            ModelState.AddModelError("username", "Invalid username or password");
             return View("Login");
         }
 
@@ -138,6 +141,22 @@ namespace WebForm.Controllers
             return byte2String;
         }
 
+
+        [ActionName("IndexWithResellerID")]
+        public ActionResult Index(string resellerID)
+        {
+            ViewBag.Username = resellerID;
+            return View();
+        }
+
+        public ActionResult order(string resellerID)
+        {
+            Session["username"] = resellerID;
+            return RedirectToAction("Index", "CurrentGoods", new
+            {
+                username = resellerID
+            });
+        }
 
         //Logout
         public ActionResult Logout()
