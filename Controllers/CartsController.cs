@@ -248,9 +248,8 @@ namespace WebForm.Controllers
         string currentCartNumber = "";
 
         [HttpPost]
-        public JsonResult Add(string id, int quantity)
+        public JsonResult Add(string resellerID ,string id, int quantity)
         {
-            string resellerID;
             string goodID = id;
             string sql = "select * from cart";
 
@@ -293,7 +292,7 @@ namespace WebForm.Controllers
             {
                 string nextOrderID = getID("O", "orderList", "orderID");
 
-                sql = "insert into Cart values ( 'C0001','"+nextOrderID+"','" + goodID + "','"+goodName+"'," + price + "," + quantity + "," + total + ")";
+                sql = "insert into Cart values ( 'C0001','"+nextOrderID+"','" + goodID + "','"+goodName+"'," + price + "," + quantity + "," + total + ",'" + resellerID + "')";
                 actionQuery(sql);
             }
 

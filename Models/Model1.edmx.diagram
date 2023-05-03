@@ -5,12 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="709a5b26619548ba9fc42263fbc1dbd8" Name="Diagram1">
-        <EntityTypeShape EntityType="distributorManageModel.CurrentGood" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="distributorManageModel.orderDetail" Width="1.5" PointX="0.625" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="distributorManageModel.orderList" Width="1.5" PointX="2.75" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="distributorManageModel.Reseller" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="distributorManageModel.account" Width="1.5" PointX="4.75" PointY="2.875" />
-        <EntityTypeShape EntityType="distributorManageModel.Cart" Width="1.5" PointX="0.625" PointY="0.5" />
+        <EntityTypeShape EntityType="distributorManageModel.CurrentGood" Width="1.5" PointX="4.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="distributorManageModel.orderDetail" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="distributorManageModel.orderList" Width="1.5" PointX="4.125" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="distributorManageModel.Reseller" Width="1.5" PointX="6" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="distributorManageModel.account" Width="1.5" PointX="6" PointY="2.75" />
+        <EntityTypeShape EntityType="distributorManageModel.Cart" Width="1.5" PointX="2.375" PointY="0.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -7,17 +7,20 @@
     <Property Name="username" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="pass" Type="nvarchar" MaxLength="100" />
     <Property Name="accType" Type="nvarchar" MaxLength="30" />
+    <Property Name="loginID" Type="nvarchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="Cart">
     <Key>
-      <PropertyRef Name="cartNumber" />
+      <PropertyRef Name="itemID" />
     </Key>
-    <Property Name="cartNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="cartNumber" Type="nvarchar" MaxLength="30" />
     <Property Name="orderID" Type="nvarchar" MaxLength="30" />
-    <Property Name="itemID" Type="nvarchar" MaxLength="30" />
+    <Property Name="itemID" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="itemname" Type="nvarchar" MaxLength="30" />
     <Property Name="pricePerItem" Type="int" />
     <Property Name="quantity" Type="int" />
     <Property Name="totalPrice" Type="int" />
+    <Property Name="resellerID" Type="nvarchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="CurrentGoods">
     <Key>
@@ -25,8 +28,8 @@
     </Key>
     <Property Name="goodID" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="goodName" Type="nvarchar" MaxLength="30" />
-    <Property Name="Quantity" Type="int" />
-    <Property Name="Price" Type="int" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="price" Type="int" />
   </EntityType>
   <EntityType Name="orderDetail">
     <Key>
@@ -36,8 +39,8 @@
     <Property Name="orderID" Type="nvarchar" MaxLength="30" />
     <Property Name="itemID" Type="nvarchar" MaxLength="30" />
     <Property Name="pricePerItem" Type="int" />
-    <Property Name="quantity" Type="int" />
     <Property Name="totalPrice" Type="int" />
+    <Property Name="quantity" Type="int" />
   </EntityType>
   <EntityType Name="orderList">
     <Key>

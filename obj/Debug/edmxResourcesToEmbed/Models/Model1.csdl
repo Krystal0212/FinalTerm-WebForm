@@ -6,8 +6,8 @@
     </Key>
     <Property Name="goodID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="goodName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="Quantity" Type="Int32" />
-    <Property Name="Price" Type="Int32" />
+    <Property Name="quantity" Type="Int32" />
+    <Property Name="price" Type="Int32" />
   </EntityType>
   <EntityType Name="orderDetail">
     <Key>
@@ -52,16 +52,19 @@
     <Property Name="username" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="pass" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="accType" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="loginID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Cart">
     <Key>
-      <PropertyRef Name="cartNumber" />
+      <PropertyRef Name="itemID" />
     </Key>
-    <Property Name="cartNumber" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="cartNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="orderID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="itemID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="itemID" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="itemname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="pricePerItem" Type="Int32" />
     <Property Name="quantity" Type="Int32" />
     <Property Name="totalPrice" Type="Int32" />
+    <Property Name="resellerID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

@@ -24,6 +24,8 @@ public partial class account
 
     public string accType { get; set; }
 
+    public string loginID { get; set; }
+
 }
 
 }

@@ -24,11 +24,15 @@ public partial class Cart
 
     public string itemID { get; set; }
 
+    public string itemname { get; set; }
+
     public Nullable<int> pricePerItem { get; set; }
 
     public Nullable<int> quantity { get; set; }
 
     public Nullable<int> totalPrice { get; set; }
+
+    public string resellerID { get; set; }
 
 }
 

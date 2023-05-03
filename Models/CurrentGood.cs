@@ -22,9 +22,9 @@ public partial class CurrentGood
 
     public string goodName { get; set; }
 
-    public Nullable<int> Quantity { get; set; }
+    public Nullable<int> quantity { get; set; }
 
-    public Nullable<int> Price { get; set; }
+    public Nullable<int> price { get; set; }
 
 }
 
