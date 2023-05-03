@@ -51,12 +51,6 @@ namespace WebForm.Controllers
             return View();
         }
 
-        public void connection()
-        {
-            cn = new SqlConnection();
-            cn.ConnectionString = "initial catalog = distributorManage; data source = ACERLT; integrated security = true";
-        }
-
         public void connect()
         {
             string s = "initial catalog = distributorManage; data source = ACERLT; integrated security = true";
