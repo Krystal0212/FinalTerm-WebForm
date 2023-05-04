@@ -380,12 +380,10 @@
     <Content Include="Views\Resellers\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Signup.cshtml" />
-    <Content Include="Views\Carts\Create.cshtml" />
     <Content Include="Views\Carts\Delete.cshtml" />
-    <Content Include="Views\Carts\Details.cshtml" />
-    <Content Include="Views\Carts\Edit.cshtml" />
     <Content Include="Views\Carts\Index.cshtml" />
     <Content Include="Views\Carts\View.cshtml" />
+    <Content Include="Views\Carts\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

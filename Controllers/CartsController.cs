@@ -36,16 +36,18 @@ namespace WebForm.Controllers
         {
             var carts = db.Carts.Where(c => c.resellerID == resellerID).ToList();
             return View(db.Carts.ToList());
+            
         }
 
         // GET: Carts/Details/5
-        public ActionResult Details(string id)
+        [ActionName("IndexWithResellerID")]
+        public ActionResult Details(string resellerID)
         {
-            if (id == null)
+            if (resellerID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cart cart = db.Carts.Find(id);
+            Cart cart = db.Carts.Find(resellerID);
             if (cart == null)
             {
                 return HttpNotFound();
@@ -77,14 +79,16 @@ namespace WebForm.Controllers
         }
 
         // GET: Carts/Edit/5
-        public ActionResult Edit(string id)
+        [HttpGet]
+        public ActionResult Edit(string resellerID, string itemID)
         {
-            if (id == null)
+            if (resellerID == null || itemID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cart cart = db.Carts.Find(id);
-            if (cart == null)
+            Cart cart = db.Carts.FirstOrDefault(c => c.resellerID == resellerID && c.itemID == itemID);
+
+            if (cart == null )
             {
                 return HttpNotFound();
             }
@@ -108,26 +112,29 @@ namespace WebForm.Controllers
         }
 
         // GET: Carts/Delete/5
-        public ActionResult Delete(string id)
+        [HttpGet]
+        public ActionResult Delete(string resellerID,  string itemID)
         {
-            if (id == null)
+            if (resellerID == null || itemID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cart cart = db.Carts.Find(id);
+            Cart cart = db.Carts.FirstOrDefault(c => c.resellerID == resellerID && c.itemID == itemID);
+
             if (cart == null)
             {
                 return HttpNotFound();
             }
             return View(cart);
+        
         }
 
         // POST: Carts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string resellerID, string itemID)
         {
-            Cart cart = db.Carts.Find(id);
+            Cart cart = db.Carts.FirstOrDefault(c => c.resellerID == resellerID && c.itemID == itemID);
             db.Carts.Remove(cart);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -157,7 +164,8 @@ namespace WebForm.Controllers
 
         public void connect()
         {
-            string s = "initial catalog = distributorManage; data source = ACERLT; integrated security = true";
+            //string s = "initial catalog = distributorManage; data source = ACERLT; integrated security = true";
+            string s = "initial catalog = distributorManage; data source = DESKTOP-502NHKM\\DUNG; integrated security = true";
             cn = new SqlConnection(s);
             cn.Open();
 
