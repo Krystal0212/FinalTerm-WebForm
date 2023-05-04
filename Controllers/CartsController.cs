@@ -13,6 +13,7 @@ using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
 using Newtonsoft.Json.Linq;
 using static System.Data.Entity.Infrastructure.Design.Executor;
+using System.Configuration;
 
 namespace WebForm.Controllers
 {
@@ -24,6 +25,9 @@ namespace WebForm.Controllers
         SqlConnection cn;
         SqlCommand cm = new SqlCommand();
         DataTable tb;
+
+        //for paypal
+        private readonly DbContext context;
 
         // GET: Carts
         public ActionResult Index()
@@ -305,6 +309,13 @@ namespace WebForm.Controllers
             }
 
             return Json(new { success = true });
+        }
+
+        public ActionResult purchaseByPAYPAL()
+        {
+            
+
+            return View();
         }
     }
 }
