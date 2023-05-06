@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "Up2gUic7jH16zzWY94qlm62gvwimLMP4FvQ+jEhn9jU2/A1sin5N+BpasJbGY583MC6iF7ozsWhosLdZj67jTg==",
+  "success": true,
+  "projectFilePath": "D:\\Project\\C#\\FinalTerm\\WebForm\\Source\\Source.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Administrator\\.nuget\\packages\\braintreehttp-dotnet\\0.3.0\\braintreehttp-dotnet.0.3.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

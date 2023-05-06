@@ -4,6 +4,7 @@
     ViewBag.Title = "Index";
 }
 
+<main>
 <h2>Index</h2>
 
 <table class="table">
@@ -23,25 +24,30 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.itemID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pricePerItem)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.totalPrice)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { resellerID = Session["resellerid"], itemID = item.itemID })  |
-            @Html.ActionLink("Delete", "Delete", new { resellerID = Session["resellerid"], itemID = item.itemID })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.itemID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pricePerItem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.totalPrice)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { resellerID = Session["resellerid"], itemID = item.itemID })  |
+                @Html.ActionLink("Delete", "Delete", new { resellerID = Session["resellerid"], itemID = item.itemID })
+            </td>
+        </tr>
+    }
 </table>
+<button class="btn btn-outline-cyan" type="submit" onclick="@Url.Action("PayByPaypal", "Carts")">Paypal</button>
+<form class="btn btn-outline-cyan" action="@Url.Action("PayByPaypal", "Carts")" method="post">
+    <button type="submit">PayPal</button>
+</form>
+</main>

@@ -11,8 +11,10 @@
 <main aria-labelledby="title">
     <p></p>
     <h3 id="title">@ViewBag.Title | <small class="smallsize">@ViewBag.Message</small></h3>    <p></p>
-    <p><a class="" href="@Url.Action("Index", "Carts", new { resellerID = Session["resellerid"]})">Go to your cart&raquo;</a></p>
-    
+    <p>
+        <a class="" href="@Url.Action("Index", "Carts", new { resellerID = Session["resellerid"] })">Go to your cart&raquo;</a>
+    </p>
+
     <table class="table">
         <tr>
             <th>
@@ -100,11 +102,17 @@
         //call to not change the view and run in the background
         function checkAddToCart(result) {
             var notification = document.createElement("div");
-            notification.innerText = "Added items to cart successfully";
+            if (result.success != true) {
+                notification.innerText = "Not enough goods for you";
+                notification.style.backgroundColor = "#FA3E3E";
+            }
+            else {
+                notification.innerText = "Added items to cart successfully";
+                notification.style.backgroundColor = "#4CAF50";
+            }
             notification.style.position = "fixed";
             notification.style.bottom = "10px";
             notification.style.right = "10px";
-            notification.style.backgroundColor = "#4CAF50";
             notification.style.color = "white";
             notification.style.padding = "16px";
             notification.style.borderRadius = "5px";
@@ -116,18 +124,10 @@
 
         //call to not change the view and run in the background
         function addToCart(id, quantity) {
-            var url = "@Url.Action("Add", "Carts", new { resellerID = Session["resellerid"], goodID = "", quantity = "" })";
+            var url = "@Url.Action("Add", "Carts", new { resellerID = Session["resellerid"], id = "", quantity = "" })";
             url = url + "&id=" + id + "&quantity=" + quantity;
 
             alert(url);
-            //$.ajax({
-            //    url: url,
-            //    type: "POST",
-            //    success: alert("Added items to cart successfully"),
-            //    error: function(xhr, status, error) {
-            //        console.log(xhr.responseText);
-            //    }
-            //});
 
             $.ajax({
                 url: url,

@@ -13,7 +13,9 @@ using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
 using Newtonsoft.Json.Linq;
 using static System.Data.Entity.Infrastructure.Design.Executor;
-using System.Configuration;
+using PayPal;
+using PayPal.Api;
+using Microsoft.Ajax.Utilities;
 
 namespace WebForm.Controllers
 {
@@ -26,37 +28,18 @@ namespace WebForm.Controllers
         SqlCommand cm = new SqlCommand();
         DataTable tb;
 
-        //for paypal
-        private readonly DbContext context;
-
         // GET: Carts
-        public ActionResult Index()
-        {
-            return View(db.Carts.ToList());
-        }
-
-        [ActionName("IndexWithResellerID")]
+        //[ActionName("IndexWithResellerID")] dung de phan biet voi ham cung ten
         public ActionResult Index(string resellerID)
         {
-            var carts = db.Carts.Where(c => c.resellerID == resellerID).ToList();
-            return View(db.Carts.ToList());
-            
-        }
+            List<Cart> currentItems = db.Carts.Where(c => c.resellerID == resellerID).ToList();
 
-        // GET: Carts/Details/5
-        [ActionName("IndexWithResellerID")]
-        public ActionResult Details(string resellerID)
-        {
-            if (resellerID == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Cart cart = db.Carts.Find(resellerID);
-            if (cart == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cart);
+
+            Session["resellerid"] = resellerID;
+            // For Paypal
+            Session["Cart"] = currentItems;
+            return View(currentItems.ToList());
+
         }
 
         // GET: Carts/Create
@@ -92,10 +75,22 @@ namespace WebForm.Controllers
             }
             Cart cart = db.Carts.FirstOrDefault(c => c.resellerID == resellerID && c.itemID == itemID);
 
-            if (cart == null )
+            if (cart == null)
             {
                 return HttpNotFound();
             }
+
+            var currentItem = db.CurrentGoods.FirstOrDefault(g => g.goodID == cart.itemID);
+
+            int maxQuantity = 0;
+            if (currentItem != null && currentItem.quantity.HasValue)
+            {
+                maxQuantity = currentItem.quantity.Value;
+            }
+
+            // Pass the current quantity to the view as a ViewBag property
+            ViewBag.MaxQuantity = maxQuantity;
+
             return View(cart);
         }
 
@@ -104,21 +99,21 @@ namespace WebForm.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "cartNumber,orderID,itemID,pricePerItem,quantity,totalPrice")] Cart cart)
+        public ActionResult Edit([Bind(Include = "itemID,quantity,totalPrice,resellerID")] Cart cart)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(cart).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            int quantity = (int)cart.quantity;
+            string itemID = cart.itemID;
+            string resellerDI = cart.resellerID;
+            //code here
+
             return View(cart);
         }
 
         // GET: Carts/Delete/5
         [HttpGet]
-        public ActionResult Delete(string resellerID,  string itemID)
+        public ActionResult Delete(string resellerID, string itemID)
         {
+
             if (resellerID == null || itemID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -130,7 +125,7 @@ namespace WebForm.Controllers
                 return HttpNotFound();
             }
             return View(cart);
-        
+
         }
 
         // POST: Carts/Delete/5
@@ -156,14 +151,14 @@ namespace WebForm.Controllers
 
         public ActionResult callUrl(string id, int quantity)
         {
-            string url = "/Carts/AddCart/" + id+ "?quantity="+ quantity;
+            string url = "/Carts/AddCart/" + id + "?quantity=" + quantity;
             return Redirect(url);
         }
 
         [HttpGet]
         public ActionResult AddCartUrl(string id, int quantity)
         {
-            return callUrl(id,quantity);
+            return callUrl(id, quantity);
         }
 
         public void connect()
@@ -259,8 +254,10 @@ namespace WebForm.Controllers
 
         string currentCartNumber = "";
 
+        public List<Item> Items { get; private set; }
+
         [HttpPost]
-        public JsonResult Add(string resellerID ,string id, int quantity)
+        public JsonResult Add(string resellerID, string id, int quantity)
         {
             string goodID = id;
             string sql = "select * from cart";
@@ -282,12 +279,12 @@ namespace WebForm.Controllers
                 string currentOrderID = selectQuery(sqlGetCurrentOrderID).Rows[0][0].ToString();
                 string currentCartNumber = dtCart.Rows[dtCart.Rows.Count - 1][0].ToString();
 
-                string sqlCheckExit = "select * from cart where cartNumber = 'C0001' and itemID = '" + goodID + "' and resellerID ='"+resellerID+"'";
+                string sqlCheckExit = "select * from cart where cartNumber = 'C0001' and itemID = '" + goodID + "' and resellerID ='" + resellerID + "'";
                 DataTable dtCheckExit = selectQuery(sqlCheckExit);
 
                 if (countCheck(dtCheckExit.Rows.Count))
                 {
-                    
+
                     int storedQuantity = Int32.Parse(dtCheckExit.Rows[0][5].ToString());
                     quantity = quantity + storedQuantity;
                     total = price * quantity;
@@ -296,7 +293,7 @@ namespace WebForm.Controllers
                 }
                 else
                 {
-                    sql = "insert into Cart values ( '" + currentCartNumber + "','" + currentOrderID + "','" + goodID + "','" + goodName + "'," + price + "," + quantity + "," + total + ",'"+resellerID+"')";
+                    sql = "insert into Cart values ( '" + currentCartNumber + "','" + currentOrderID + "','" + goodID + "','" + goodName + "'," + price + "," + quantity + "," + total + ",'" + resellerID + "')";
                 }
                 actionQuery(sql);
             }
@@ -304,18 +301,146 @@ namespace WebForm.Controllers
             {
                 string nextOrderID = getID("O", "orderList", "orderID");
 
-                sql = "insert into Cart values ( 'C0001','"+nextOrderID+"','" + goodID + "','"+goodName+"'," + price + "," + quantity + "," + total + ",'" + resellerID + "')";
+                sql = "insert into Cart values ( 'C0001','" + nextOrderID + "','" + goodID + "','" + goodName + "'," + price + "," + quantity + "," + total + ",'" + resellerID + "')";
                 actionQuery(sql);
             }
 
             return Json(new { success = true });
         }
 
-        public ActionResult purchaseByPAYPAL()
-        {
-            
 
-            return View();
+        // PayPal Section
+        private string strCart = "Cart";
+        private Payment payment;
+
+        private Payment CreatePayment(APIContext apiContext, string redirectUrl)
+        {
+            var listItems = new ItemList() { items = new List<Item>() };
+
+            List<Cart> listCarts = (List<Cart>)Session[strCart];
+            foreach (var cart in listCarts)
+            {
+                listItems.items.Add(new Item()
+                {
+                    name = cart.itemname,
+                    currency = "USD",
+                    price = cart.pricePerItem.ToString(),
+                    quantity = cart.quantity.ToString(),
+                    sku = "sku"
+                });
+            }
+
+            var payer = new Payer() { payment_method = "paypal" };
+
+            //Do the configuration RedirectURLs here with redirectURLs object
+            var redirUrls = new RedirectUrls()
+            {
+                cancel_url = redirectUrl,
+                return_url = redirectUrl
+            };
+
+            //Create datails object
+            var details = new Details()
+            {
+                tax = "1",
+                shipping = "2",
+                subtotal = listCarts.Sum(x => x.quantity * x.pricePerItem).ToString()
+            };
+
+            //Create amount object
+            var amount = new Amount()
+            {
+                currency = "USD",
+                total = (Convert.ToDouble(details.tax) + Convert.ToDouble(details.shipping) + Convert.ToDouble(details.subtotal)).ToString(),
+                details = details
+            };
+
+            var a = apiContext.ToString();
+
+            //Transaction
+            var transactionList = new List<Transaction>();
+            transactionList.Add(new Transaction()
+            {
+                description = "Testing transaction description",
+                invoice_number = Convert.ToString((new Random()).Next(100000)),
+                amount = amount,
+                item_list = listItems
+            });
+
+            payment = new Payment()
+            {
+                intent = "sale",
+                payer = payer,
+                transactions = transactionList,
+                redirect_urls = redirUrls,
+            };
+
+            return payment.Create(apiContext);
+        }
+
+        // Execute Payment
+        private Payment ExecutePayment(APIContext apiContext, string payerID, string paymentID)
+        {
+            var paymentExecution = new PaymentExecution()
+            {
+                payer_id = payerID
+            };
+            payment = new Payment() { id = paymentID };
+            return payment.Execute(apiContext, paymentExecution);
+        }
+
+        public ActionResult PayByPaypal()
+        {
+            // Get context depends on ClientID and SecretKey
+            APIContext apiContext = PaypalConfiguration.GetAPIContext();
+
+            try
+            {
+                string payerId = Request.Params["PayerID"];
+                Boolean a = string.IsNullOrEmpty(payerId);
+                if (string.IsNullOrEmpty(payerId))
+                {
+                    // Create payment
+                    string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/Carts/PayByPaypal?";
+                    var guid = Convert.ToString((new Random()).Next(100000));
+                    var createdPayment = CreatePayment(apiContext, baseURI + "guid=" + guid);
+
+                    // Receive returned link from Paypal response to create call function
+                    var links = createdPayment.links.GetEnumerator();
+                    string paypalRedirectUrl = string.Empty;
+                    while (links.MoveNext())
+                    {
+                        Links link = links.Current;
+                        if (link.rel.ToLower().Trim().Equals("approval_url"))
+                        {
+                            paypalRedirectUrl = link.href;
+                        }
+                    }
+                    Session.Add(guid, createdPayment.id);
+
+                    return Redirect(paypalRedirectUrl);
+                }
+                else
+                {
+                    // This section can only be executed if received all payment params from previous call
+                    var guid = Request.Params["guid"];
+                    var executePayment = ExecutePayment(apiContext, payerId, Session[guid] as string);
+                    if (executePayment.state.ToLower() != "approved")
+                    {
+                        return View("Failure", Session["resellerid"]);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                PaypalLogger.Log("Error: " + ex.Message);
+                return View("Failure", Session["resellerid"]);
+            }
+
+            //change some local path and add "/" between controllers and views in baseURI to get right urls
+            //change redirecttoaction() to redirect, reduce the total in amount in CreatePayment
+
+            return View("Success", Session["resellerid"]);
         }
     }
 }
