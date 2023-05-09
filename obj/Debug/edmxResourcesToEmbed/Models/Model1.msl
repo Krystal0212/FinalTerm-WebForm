@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="distributorManageModelStoreContainer" CdmEntityContainer="distributorManageEntities">
+    <EntitySetMapping Name="CurrentGoods">
+      <EntityTypeMapping TypeName="distributorManageModel.CurrentGood">
+        <MappingFragment StoreEntitySet="CurrentGoods">
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="goodID" ColumnName="goodID" />
+          <ScalarProperty Name="goodName" ColumnName="goodName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resellers">
+      <EntityTypeMapping TypeName="distributorManageModel.Reseller">
+        <MappingFragment StoreEntitySet="Reseller">
+          <ScalarProperty Name="resellerID" ColumnName="resellerID" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="displayname" ColumnName="displayname" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="accounts">
+      <EntityTypeMapping TypeName="distributorManageModel.account">
+        <MappingFragment StoreEntitySet="account">
+          <ScalarProperty Name="loginID" ColumnName="loginID" />
+          <ScalarProperty Name="accType" ColumnName="accType" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+          <ScalarProperty Name="username" ColumnName="username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Carts">
+      <EntityTypeMapping TypeName="distributorManageModel.Cart">
+        <MappingFragment StoreEntitySet="Cart">
+          <ScalarProperty Name="resellerID" ColumnName="resellerID" />
+          <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="pricePerItem" ColumnName="pricePerItem" />
+          <ScalarProperty Name="itemname" ColumnName="itemname" />
+          <ScalarProperty Name="itemID" ColumnName="itemID" />
+          <ScalarProperty Name="orderID" ColumnName="orderID" />
+          <ScalarProperty Name="cartNumber" ColumnName="cartNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orderDetails">
+      <EntityTypeMapping TypeName="distributorManageModel.orderDetail">
+        <MappingFragment StoreEntitySet="orderDetail">
+          <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="pricePerItem" ColumnName="pricePerItem" />
+          <ScalarProperty Name="itemname" ColumnName="itemname" />
+          <ScalarProperty Name="itemID" ColumnName="itemID" />
+          <ScalarProperty Name="orderID" ColumnName="orderID" />
+          <ScalarProperty Name="orderNumber" ColumnName="orderNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orderLists">
+      <EntityTypeMapping TypeName="distributorManageModel.orderList">
+        <MappingFragment StoreEntitySet="orderList">
+          <ScalarProperty Name="paymentStatus" ColumnName="paymentStatus" />
+          <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="C_address" ColumnName="_address" />
+          <ScalarProperty Name="paymentMethod" ColumnName="paymentMethod" />
+          <ScalarProperty Name="C_status" ColumnName="_status" />
+          <ScalarProperty Name="createdDay" ColumnName="createdDay" />
+          <ScalarProperty Name="resellerID" ColumnName="resellerID" />
+          <ScalarProperty Name="orderID" ColumnName="orderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

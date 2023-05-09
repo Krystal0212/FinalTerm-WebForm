@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="distributorManageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="account">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="pass" Type="nvarchar" MaxLength="100" />
+    <Property Name="accType" Type="nvarchar" MaxLength="30" />
+    <Property Name="loginID" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="cartNumber" />
+    </Key>
+    <Property Name="cartNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="orderID" Type="nvarchar" MaxLength="30" />
+    <Property Name="itemID" Type="nvarchar" MaxLength="30" />
+    <Property Name="itemname" Type="nvarchar" MaxLength="30" />
+    <Property Name="pricePerItem" Type="int" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="totalPrice" Type="int" />
+    <Property Name="resellerID" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="CurrentGoods">
+    <Key>
+      <PropertyRef Name="goodID" />
+    </Key>
+    <Property Name="goodID" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="goodName" Type="nvarchar" MaxLength="30" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="price" Type="int" />
+  </EntityType>
+  <EntityType Name="orderDetail">
+    <Key>
+      <PropertyRef Name="orderNumber" />
+    </Key>
+    <Property Name="orderNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="orderID" Type="nvarchar" MaxLength="30" />
+    <Property Name="itemID" Type="nvarchar" MaxLength="30" />
+    <Property Name="itemname" Type="nvarchar" MaxLength="30" />
+    <Property Name="pricePerItem" Type="int" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="totalPrice" Type="int" />
+  </EntityType>
+  <EntityType Name="orderList">
+    <Key>
+      <PropertyRef Name="orderID" />
+    </Key>
+    <Property Name="orderID" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="resellerID" Type="nvarchar" MaxLength="30" />
+    <Property Name="createdDay" Type="date" />
+    <Property Name="_status" Type="nvarchar" MaxLength="30" />
+    <Property Name="paymentMethod" Type="nvarchar" MaxLength="30" />
+    <Property Name="_address" Type="nvarchar" MaxLength="30" />
+    <Property Name="phoneNumber" Type="nvarchar" MaxLength="30" />
+    <Property Name="email" Type="nvarchar" MaxLength="30" />
+    <Property Name="totalPrice" Type="int" />
+    <Property Name="paymentStatus" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Reseller">
+    <Key>
+      <PropertyRef Name="resellerID" />
+    </Key>
+    <Property Name="resellerID" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="30" />
+    <Property Name="displayname" Type="nvarchar" MaxLength="30" />
+    <Property Name="email" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityContainer Name="distributorManageModelStoreContainer">
+    <EntitySet Name="account" EntityType="Self.account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CurrentGoods" EntityType="Self.CurrentGoods" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="orderDetail" EntityType="Self.orderDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="orderList" EntityType="Self.orderList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reseller" EntityType="Self.Reseller" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
