@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="distributorManageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="pass" Type="nvarchar" MaxLength="100" />
+          <Property Name="accType" Type="nvarchar" MaxLength="30" />
+          <Property Name="loginID" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="cartNumber" />
+          </Key>
+          <Property Name="cartNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="orderID" Type="nvarchar" MaxLength="30" />
+          <Property Name="itemID" Type="nvarchar" MaxLength="30" />
+          <Property Name="itemname" Type="nvarchar" MaxLength="30" />
+          <Property Name="pricePerItem" Type="int" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="totalPrice" Type="int" />
+          <Property Name="resellerID" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="CurrentGoods">
+          <Key>
+            <PropertyRef Name="goodID" />
+          </Key>
+          <Property Name="goodID" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="goodName" Type="nvarchar" MaxLength="30" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="price" Type="int" />
+        </EntityType>
+        <EntityType Name="orderDetail">
+          <Key>
+            <PropertyRef Name="orderNumber" />
+          </Key>
+          <Property Name="orderNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="orderID" Type="nvarchar" MaxLength="30" />
+          <Property Name="itemID" Type="nvarchar" MaxLength="30" />
+          <Property Name="itemname" Type="nvarchar" MaxLength="30" />
+          <Property Name="pricePerItem" Type="int" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="totalPrice" Type="int" />
+        </EntityType>
+        <EntityType Name="orderList">
+          <Key>
+            <PropertyRef Name="orderID" />
+          </Key>
+          <Property Name="orderID" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="resellerID" Type="nvarchar" MaxLength="30" />
+          <Property Name="createdDay" Type="date" />
+          <Property Name="_status" Type="nvarchar" MaxLength="30" />
+          <Property Name="paymentMethod" Type="nvarchar" MaxLength="30" />
+          <Property Name="_address" Type="nvarchar" MaxLength="30" />
+          <Property Name="phoneNumber" Type="nvarchar" MaxLength="30" />
+          <Property Name="email" Type="nvarchar" MaxLength="30" />
+          <Property Name="totalPrice" Type="int" />
+          <Property Name="paymentStatus" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Reseller">
+          <Key>
+            <PropertyRef Name="resellerID" />
+          </Key>
+          <Property Name="resellerID" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="30" />
+          <Property Name="displayname" Type="nvarchar" MaxLength="30" />
+          <Property Name="email" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityContainer Name="distributorManageModelStoreContainer">
+          <EntitySet Name="account" EntityType="Self.account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CurrentGoods" EntityType="Self.CurrentGoods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orderDetail" EntityType="Self.orderDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orderList" EntityType="Self.orderList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reseller" EntityType="Self.Reseller" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="distributorManageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CurrentGood">
+          <Key>
+            <PropertyRef Name="goodID" />
+          </Key>
+          <Property Name="goodID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="goodName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="price" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Reseller">
+          <Key>
+            <PropertyRef Name="resellerID" />
+          </Key>
+          <Property Name="resellerID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="displayname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="distributorManageEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CurrentGoods" EntityType="Self.CurrentGood" />
+          <EntitySet Name="Resellers" EntityType="Self.Reseller" />
+          <EntitySet Name="accounts" EntityType="distributorManageModel.account" />
+          <EntitySet Name="Carts" EntityType="distributorManageModel.Cart" />
+          <EntitySet Name="orderDetails" EntityType="distributorManageModel.orderDetail" />
+          <EntitySet Name="orderLists" EntityType="distributorManageModel.orderList" />
+        </EntityContainer>
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="pass" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="accType" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="loginID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="cartNumber" />
+          </Key>
+          <Property Name="cartNumber" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="orderID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="itemID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="itemname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="pricePerItem" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="totalPrice" Type="Int32" />
+          <Property Name="resellerID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="orderDetail">
+          <Key>
+            <PropertyRef Name="orderNumber" />
+          </Key>
+          <Property Name="orderNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="orderID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="itemID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="itemname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="pricePerItem" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="totalPrice" Type="Int32" />
+        </EntityType>
+        <EntityType Name="orderList">
+          <Key>
+            <PropertyRef Name="orderID" />
+          </Key>
+          <Property Name="orderID" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="resellerID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="createdDay" Type="DateTime" Precision="0" />
+          <Property Name="C_status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="paymentMethod" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="C_address" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="phoneNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="totalPrice" Type="Int32" />
+          <Property Name="paymentStatus" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="distributorManageModelStoreContainer" CdmEntityContainer="distributorManageEntities">
+          <EntitySetMapping Name="CurrentGoods">
+            <EntityTypeMapping TypeName="distributorManageModel.CurrentGood">
+              <MappingFragment StoreEntitySet="CurrentGoods">
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="goodID" ColumnName="goodID" />
+                <ScalarProperty Name="goodName" ColumnName="goodName" />
+                </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resellers">
+            <EntityTypeMapping TypeName="distributorManageModel.Reseller">
+              <MappingFragment StoreEntitySet="Reseller">
+                <ScalarProperty Name="resellerID" ColumnName="resellerID" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="displayname" ColumnName="displayname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="accounts">
+            <EntityTypeMapping TypeName="distributorManageModel.account">
+              <MappingFragment StoreEntitySet="account">
+                <ScalarProperty Name="loginID" ColumnName="loginID" />
+                <ScalarProperty Name="accType" ColumnName="accType" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="username" ColumnName="username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="distributorManageModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="resellerID" ColumnName="resellerID" />
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="pricePerItem" ColumnName="pricePerItem" />
+                <ScalarProperty Name="itemname" ColumnName="itemname" />
+                <ScalarProperty Name="itemID" ColumnName="itemID" />
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+                <ScalarProperty Name="cartNumber" ColumnName="cartNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orderDetails">
+            <EntityTypeMapping TypeName="distributorManageModel.orderDetail">
+              <MappingFragment StoreEntitySet="orderDetail">
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="pricePerItem" ColumnName="pricePerItem" />
+                <ScalarProperty Name="itemname" ColumnName="itemname" />
+                <ScalarProperty Name="itemID" ColumnName="itemID" />
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+                <ScalarProperty Name="orderNumber" ColumnName="orderNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orderLists">
+            <EntityTypeMapping TypeName="distributorManageModel.orderList">
+              <MappingFragment StoreEntitySet="orderList">
+                <ScalarProperty Name="paymentStatus" ColumnName="paymentStatus" />
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="C_address" ColumnName="_address" />
+                <ScalarProperty Name="paymentMethod" ColumnName="paymentMethod" />
+                <ScalarProperty Name="C_status" ColumnName="_status" />
+                <ScalarProperty Name="createdDay" ColumnName="createdDay" />
+                <ScalarProperty Name="resellerID" ColumnName="resellerID" />
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
