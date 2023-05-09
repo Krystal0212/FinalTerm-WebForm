@@ -1,0 +1,72 @@
+﻿@model IEnumerable<WebForm.Models.Cart>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.itemID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.itemname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pricePerItem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.totalPrice)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.itemID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.itemname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pricePerItem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.totalPrice)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { resellerID = Session["resellerid"], itemID = item.itemID, cartNumber = item.cartNumber })  |
+                @Html.ActionLink("Delete", "Delete", new { resellerID = Session["resellerid"], itemID = item.itemID, cartNumber = item.cartNumber })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div>
+    <p><a class="btn btn-outline-dark" href="@Url.Action("Index", "CurrentGoods", new { resellerID = Session["resellerid"]} )">Back to shopping page &raquo;</a></p>
+</div>
+
+@if (ViewBag.status == "Exist")
+{
+    <div>
+        <p><a class="btn btn-outline-success" href="@Url.Action("Index", "orderLists", new { resellerID = Session["resellerid"], payout = "checked"} )">Purchase on delivery &raquo;</a></p>
+    </div>
+
+    <form action="@Url.Action("PayByPaypal", "Carts")" method="post">
+        <button class="btn btn-outline-info" type="submit">PayPal &raquo;</button>
+    </form>
+}
+
+
+

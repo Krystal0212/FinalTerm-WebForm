@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Success";
+}
+
+<style>
+    .success-container {
+        text-align: center;
+        padding: 20px;
+        background-color: #F3F3F3;
+        border-radius: 5px;
+    }
+
+    h2 {
+        color: #2ECC71;
+        margin-bottom: 20px;
+    }
+
+    p {
+        margin-bottom: 10px;
+    }
+
+    .back-link {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #2ECC71;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+</style>
+
+<div class="success-container">
+    <h2>Success</h2>
+
+    <div>
+        <p>Your payment has been successfully processed.</p>
+        <p>Thank you for your order!</p>
+    </div>
+
+    <div>
+        <form action="@Url.Action("Index", "orderLists", new { resellerID = Session["resellerid"] })" method="post">
+            <button class="btn btn-outline-info" type="submit">See your order &raquo;</button>
+        </form>
+    </div>
+</div>

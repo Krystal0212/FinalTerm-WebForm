@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "Sign up";
+}
+
+<head>
+    <link href="@Url.Content("~/Content/Aternative.css")" rel="stylesheet" type="text/css" />
+</head>
+
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title | <small class="smallsize">@ViewBag.Message</small></h2>
+
+    <p> </p>
+
+    <form action="signupacc" method="post" onsubmit="return validateForm()">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" class="form-control" id="username" placeholder="Enter username">
+        </div>
+
+        <p> </p>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="pass" class="form-control" id="password" placeholder="Password">
+        </div>
+
+        <p> </p>
+
+        <div class="form-group">
+            <label for="password-retype">Type again your password</label>
+            <input type="password" name="password-retype" class="form-control" id="password-retype" placeholder="Enter password again">
+        </div>
+
+        <p> </p>
+
+        <button type="submit" class="btn btn-outline-cyan">Submit</button>
+    </form>
+</main>
+
+<script>
+    function validateForm() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var passwordRetype = document.getElementById("password-retype").value;
+
+        if (username.trim() === "" || password.trim() === "" || passwordRetype.trim() === "") {
+            alertResult("Please fill in all the fields", "#FFDA62");
+            return false;
+        }
+
+        if (password !== passwordRetype) {
+            alertResult("Passwords do not match", "#FFDA62");
+            return false;
+        }
+
+        var data = {
+            username: username,
+            pass: password
+        };
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/Home/Signupacc", true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    var result = xhr.responseText;
+
+                    if (result === "Sign up successfully") {
+                        window.location.href = "/Home/Login";
+                        alertResult(result, "#4CAF50");
+                        return true;
+                    }
+                    if (result === "Username existed") {
+                        alertResult(result, "#FF9494");
+                        return false;
+                    }
+                } else {
+                    alertResult("Error occurred while signing up", "#FF9494");
+                }
+            }
+        };
+        xhr.send(JSON.stringify(data));
+
+        return false;
+    }
+
+    function alertResult(result, color) {
+        var notification = document.createElement("div");
+
+
+        notification.innerText = result;
+        notification.style.backgroundColor = color;
+
+        //notification.innerText = "Sign up successfully";
+        //notification.style.backgroundColor = "#4CAF50";
+
+        //notification.innerText = "Invalid username or password";
+        //notification.style.backgroundColor = "#FF9494";
+
+        notification.style.position = "fixed";
+        notification.style.bottom = "10px";
+        notification.style.right = "10px";
+        notification.style.color = "white";
+        notification.style.padding = "16px";
+        notification.style.borderRadius = "5px";
+        document.body.appendChild(notification);
+        setTimeout(function () {
+            notification.remove();
+        }, 3000);
+    }
+</script>

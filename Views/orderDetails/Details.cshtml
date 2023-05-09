@@ -1,0 +1,64 @@
+﻿@model IEnumerable<WebForm.Models.orderDetail>
+
+
+    @{
+        ViewBag.Title = "Your order detail";
+    }
+
+ 
+
+    <table class="table">
+        <tr>
+            <th>
+                Order ID
+            </th>
+            <th>
+                Item ID
+            </th>
+            <th>
+                Item name
+            </th>
+            <th>
+               Price/Item
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Total price
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.orderID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.itemID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.itemname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pricePerItem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.totalPrice)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+</section>
+
+
+<div>
+    <p><a class="btn btn-outline-dark" href="@Url.Action("Index", "orderLists",  new { resellerID = Session["resellerid"], payout = "unchecked"} )">Back to list &raquo;</a></p>
+</div>

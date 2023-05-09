@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Failure";
+}
+
+<style>
+    .failure-container {
+        text-align: center;
+        padding: 20px;
+        background-color: #F3F3F3;
+        border-radius: 5px;
+    }
+
+    h2 {
+        color: #FF0000;
+        margin-bottom: 20px;
+    }
+
+    p {
+        margin-bottom: 10px;
+    }
+
+    .back-link {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #FF0000;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+        .back-link:hover {
+            background-color: #FF9999;
+            color: #000000;
+        }
+</style>
+
+<div class="failure-container">
+    <h2>Failure</h2>
+
+    <div>
+        <p>Sorry, your payment was not successful.</p>
+        <p>Please try again or contact customer support for assistance.</p>
+    </div>
+
+    <div>
+        <a href="@Url.Action("Index", "CurrentGoods", new { resellerID = Session["resellerid"] } )" class="back-link">Back to Home</a>
+    </div>
+</div>

@@ -1,0 +1,102 @@
+﻿@model IEnumerable<WebForm.Models.orderList>
+
+
+    <h2 id="gettingStartedTitle">Make Order</h2>
+    <p>
+        @if (ViewBag.status == "new reseller")
+        {
+
+            <div>
+                <p><a class="btn btn-outline-dark" href="@Url.Action("Information", "orderLists", new { resellerID = Session["resellerid"]} )">Please do some step first &raquo;</a></p>
+            </div>
+
+        }
+        else
+        {
+
+                {
+                    ViewBag.Title = "Your order";
+                }
+
+                <h2>Index</h2>
+
+                <p>
+                    <div>
+                        <p><a class="btn btn-outline-dark" href="@Url.Action("Index", "CurrentGoods", new { resellerID = Session["resellerid"]} )">Create new &raquo;</a></p>
+                    </div>
+
+                </p>
+                <table class="table table-custom-width">
+                    <tr>
+                        <th>
+                            Created day
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Payment method
+                        </th>
+                        <th>
+                            Address
+                        </th>
+                        <th>
+                            Phone number
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Total price
+                        </th>
+                        <th>
+                            Payment Status
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.createdDay)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.C_status)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.paymentMethod)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.C_address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.phoneNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.totalPrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.paymentStatus)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.orderID, resellerID = Session["resellerid"], payout = "unchecked" })
+                                <a href="@Url.Action("Details", "orderDetails", new { id = item.orderID, resellerID = Session["resellerid"], payout = "unchecked" } )">Details</a>
+                                @Html.ActionLink("Delete", "Delete", new { id = item.orderID, payout = "unchecked" })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+
+        }
+    </p>
+
+
+
+<div>
+    <p><a class="btn btn-outline-dark" href="@Url.Action("Index", "orderLists", new { resellerID = Session["resellerid"], payout = "unchecked"} )">Update &raquo;</a></p>
+</div>

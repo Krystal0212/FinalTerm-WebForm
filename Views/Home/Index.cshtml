@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<main>
+    <section class="row" aria-labelledby="aspnetTitle">
+        <h1 id="title">Please make order for us :<</h1>
+        <p class="lead">Trang web ban hang uy tin nhat VN.</p>
+
+    <div class="row">
+        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
+            <h2 id="gettingStartedTitle">Make Order</h2>
+            <p>
+                @if (HttpContext.Current.Session["resellerID"] != null)
+                {
+                <p>
+                    Online ordering provides a convenient, streamlined way to purchase products or services with ease,
+                    efficiency, and availability for modern consumers.
+                </p>
+                <a class="btn btn-outline-dark" href="@Url.Action("Index", "CurrentGoods", new { resellerID = Session["resellerid"]} )">Go to &raquo;</a>
+
+            }
+            else
+            {
+
+                @*<h3 href="@Url.Action("Login", "Home", new { resellerID = Session["resellerid"]} )"> Please Log into your account first to use this section</h3>*@
+                <h3 class="nav-item">@Html.ActionLink("Please Log into your account first to use this section (Click me)", "Login", "Home", new { area = "" }, new { @class = "nav-link" })</h3>
+            }
+
+            </p>
+            </section>
+
+        <section class="col-md-4" aria-labelledby="librariesTitle">
+            <h2 id="librariesTitle">Check your order list</h2>
+
+            <p>
+                @if (HttpContext.Current.Session["resellerID"] != null)
+                {
+                <p>
+                    The user order list section allows you to view and manage your past and current orders with ease, providing a convenient way to keep track of your purchases.
+                </p>
+                <a class="btn btn-outline-dark" href="@Url.Action("Index", "orderLists", new { resellerID = Session["resellerid"], payout = "unchecked"} )">Go to &raquo;</a>
+
+            }
+                else
+                {
+
+                    @*<h3 href="@Url.Action("Login", "Home", new { resellerID = Session["resellerid"]} )"> Please Log into your account first to use this section</h3>*@
+                    <h3 class="nav-item">@Html.ActionLink("Please Log into your account first to use this section (Click me)", "Login", "Home", new { area = "" }, new { @class = "nav-link" })</h3>
+                }
+
+                </p>
+
+            </div>
+        </main>

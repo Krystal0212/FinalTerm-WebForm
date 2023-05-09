@@ -1,0 +1,23 @@
+﻿@model WebForm.Models.orderList
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <input type="submit" value="Delete" class="btn btn-default" /> 
+    <div>
+        <p><a class="btn btn-outline-dark" href="@Url.Action("Index", "orderLists",  new { resellerID = Session["resellerid"], payout = "unchecked"} )">Back to list &raquo;</a></p>
+    </div>
+
+</div>
+    }
+</div>

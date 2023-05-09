@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewBag.Title = "Log in";
+}
+
+<head>
+    <link href="@Url.Content("~/Content/Aternative.css")" rel="stylesheet" type="text/css" />
+</head>
+
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title | <small class="smallsize">@ViewBag.Message</small></h2>
+
+    <p> </p>
+
+    <form action="verify" method="post" onsubmit="return validateForm()">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" class="form-control" id="username" placeholder="Enter username">
+        </div>
+
+        <p> </p>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="pass" class="form-control" id="password" placeholder="Password">
+        </div>
+
+        <p> </p>
+
+        <div class="form-group">
+            <label>
+                Not have agent or reseller account yet ? Sign up
+                @Html.ActionLink("here", "Signup", "Home")
+            </label>
+        </div>
+
+        <p> </p>
+
+        <button type="submit" class="btn btn-outline-cyan" id="button-cyan">Submit</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            if (username.trim() === "" || password.trim() === "") {
+                alertResult("Please fill in all the information.");
+                return false;
+            }
+
+            var data = {
+                username: username,
+                pass: password
+            };
+
+            // Send AJAX request to the server
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/Home/Verify", true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        var result = xhr.responseText;
+                        alertResult(result);
+                        if (result === "Logged in successfully") {
+                            window.location.href = "/Home/Index?resellerID=" + username;
+                            return true;
+                        }
+                    } else {
+                        alertResult("Error occurred while logging in.");
+                    }
+                }
+            };
+            xhr.send(JSON.stringify(data));
+
+            return false; // Prevent the form from submitting
+        }
+
+        function alertResult(result) {
+            var notification = document.createElement("div");
+
+            if (result === "Please fill in all the information.") {
+                notification.innerText = "Please fill in all the information.";
+                notification.style.backgroundColor = "#FFDA62";
+            }
+            else if (result === "Logged in successfully") {
+                notification.innerText = "Logged in successfully";
+                notification.style.backgroundColor = "#4CAF50";
+            }
+            else if (result === "Invalid username or password") {
+                notification.innerText = "Invalid username or password";
+                notification.style.backgroundColor = "#FF9494";
+            }
+
+            notification.style.position = "fixed";
+            notification.style.bottom = "10px";
+            notification.style.right = "10px";
+            notification.style.color = "white";
+            notification.style.padding = "16px";
+            notification.style.borderRadius = "5px";
+            document.body.appendChild(notification);
+            setTimeout(function () {
+                notification.remove();
+            }, 3000);
+        }
+    </script>
+
+</main>
